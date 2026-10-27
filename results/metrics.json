@@ -1,0 +1,94 @@
+{
+  "dataset": "SciFact dev",
+  "evaluations": {
+    "original_gold_evidence_pairs": {
+      "n_pairs": 209,
+      "n_claims": 188,
+      "rules": {
+        "accuracy": 0.3875598086124402,
+        "macro_f1_present_gold_labels": 0.37022936205775836
+      },
+      "nli": {
+        "accuracy": 0.6267942583732058,
+        "macro_f1_present_gold_labels": 0.6885964912280702
+      },
+      "nli_confusion_matrix_labels": [
+        "CONTRADICTED",
+        "SUPPORTED",
+        "UNSUPPORTED_EXTRAPOLATION"
+      ],
+      "nli_confusion_matrix": [
+        [
+          50,
+          9,
+          12
+        ],
+        [
+          29,
+          81,
+          28
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "paired_accuracy_gain_ci95_claim_bootstrap": [
+        0.13636363636363635,
+        0.33990394088669945
+      ]
+    },
+    "including_no_evidence_cited_documents": {
+      "n_pairs": 323,
+      "n_claims": 300,
+      "rules": {
+        "accuracy": 0.5572755417956656,
+        "macro_f1_present_gold_labels": 0.45495370370370375
+      },
+      "nli": {
+        "accuracy": 0.6780185758513931,
+        "macro_f1_present_gold_labels": 0.6696505001589749
+      },
+      "nli_confusion_matrix_labels": [
+        "CONTRADICTED",
+        "SUPPORTED",
+        "UNSUPPORTED_EXTRAPOLATION"
+      ],
+      "nli_confusion_matrix": [
+        [
+          50,
+          9,
+          12
+        ],
+        [
+          29,
+          81,
+          28
+        ],
+        [
+          18,
+          8,
+          88
+        ]
+      ],
+      "paired_accuracy_gain_ci95_claim_bootstrap": [
+        0.043478260869565216,
+        0.19506485695102382
+      ]
+    }
+  },
+  "method": "Frozen SNLI/MultiNLI NLI encoder with a linear classifier fitted on official SciFact training pairs; top-three unsupervised evidence sentence selection",
+  "encoder_revision": "fa2804872c3b4bd748f38c0185cc85775361e735",
+  "protocol": "Top 3 abstract sentences by unsupervised TF-IDF, original order; 3-class argmax; 512-token premise truncation with claim preserved. Gold rationale sentences never used. Head parameters fixed before this dev evaluation.",
+  "input_sha256": {
+    "corpus.jsonl": "b8d6c89624cb2ed74dee8938effc4f5d8bd2086887880af8110d64be4ceade62",
+    "claims_dev.jsonl": "86f0435d08fdb65d1aa41d1472684f57e6e71930626497bdf4d7a9ec1a632217"
+  },
+  "limitations": [
+    "Development split, not an independent hidden test.",
+    "Gold evidence abstracts are supplied for supported/refuted claims, so retrieval is not evaluated.",
+    "The extended set adds cited documents for claims with no annotated evidence as NEI; not directly comparable to the original two-label subset.",
+    "NLI scores are not calibrated and the API still cannot certify safety."
+  ]
+}
